@@ -22,8 +22,3 @@ in this model i used MNIST and [printed digit dataset](https://github.com/kaydee
   <img src="https://github.com/momoein/Ai_sudoku_solver/blob/master/img/sudoku2.png" width="225" height="225" align = "middle"/>
   
 + File [main.py](https://github.com/momoein/Ai_sudoku_solver/tree/master/main.py)
-
-## Contribute:
-We still required more data, apart from that images of digit `0` is needed, Pull Requests are most welcome and appreciated..
-
-
