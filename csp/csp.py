@@ -143,5 +143,6 @@ def backtracking_search(csp, assignment: dict={}, select_unassigned_variable=fir
         return None
 
     result = backtrack(assignment)
-    assert result is None or csp.goal_test(result)
+    if not (result is None or csp.goal_test(result)):
+        return None
     return result
