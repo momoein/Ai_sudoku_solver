@@ -4,7 +4,6 @@ import pandas as pd
 from torchvision.datasets import MNIST
 from torch.utils.data import Dataset, DataLoader, Subset
 import torchvision.transforms as transforms
-import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from PIL import Image
 
@@ -32,6 +31,7 @@ class DigitDataset(Dataset):
         return image, label
     
 
+
 transform = transforms.Compose([
     transforms.RandomRotation(10),
     transforms.RandomAffine(0, shear=10, scale=(0.8, 1.2)),
@@ -41,30 +41,64 @@ transform = transforms.Compose([
 ])
 
 
-# load my dataset
-my_dataset = DigitDataset(annotations_file='./data/printed_digit/labels.csv',
-                       img_dir='./data/printed_digit/',
-                       transform=transform)
+# load printed_digit dataset
+pdig_dataset = DigitDataset(annotations_file='./data/printed_digit/labels.csv',
+                          img_dir='./data/printed_digit/',
+                          transform=transform)
 
-train_indices, test_indices = train_test_split(np.arange(len(my_dataset)), test_size=0.2, random_state=42)
+train_indices, test_indices = train_test_split(np.arange(len(pdig_dataset)), 
+                                               test_size=0.2, random_state=42)
 
-my_trainset = Subset(my_dataset, train_indices)
-my_testset = Subset(my_dataset, test_indices)
+pdig_trainset = Subset(pdig_dataset, train_indices)
+pdig_testset = Subset(pdig_dataset, test_indices)
 
-my_trainloader = DataLoader(my_trainset, batch_size=10, shuffle=True)
-my_testloader = DataLoader(my_testset, batch_size=10, shuffle=True)
+pdig_trainloader = DataLoader(pdig_trainset, batch_size=10, shuffle=True)
+pdig_testloader = DataLoader(pdig_testset, batch_size=10, shuffle=True)
 
 
 # Load MNIST dataset
-data_root = "./data"
-mnist_trainset = MNIST(root=data_root, train=True, download=True, transform=transform)
-mnist_testset = MNIST(root=data_root, train=False, download=True, transform=transform)
+mnist_trainset = MNIST(root="./data", train=True, download=True, transform=transform)
+mnist_testset = MNIST(root="./data", train=False, download=True, transform=transform)
 
 mnist_trainloader = DataLoader(mnist_trainset, batch_size=10, shuffle=True)
 mnist_testloader = DataLoader(mnist_testset, batch_size=10, shuffle=False)
 
 
+# Load hoda dataset
+hoda_dataset = DigitDataset(annotations_file='./data/hoda/labels.csv',
+                            img_dir='./data/hoda/',
+                            transform=transform)
+
+hoda_train_idx, hoda_test_idx = train_test_split(np.arange(len(hoda_dataset)),
+                                                  test_size=0.2, random_state=42)
+
+hoda_trainset = Subset(hoda_dataset, hoda_train_idx)
+hoda_testset = Subset(hoda_dataset, hoda_test_idx)
+
+hoda_trainloader = DataLoader(hoda_trainset, batch_size=10, shuffle=True)
+hoda_testloader = DataLoader(hoda_testset, batch_size=10, shuffle=True)
+
+
+
+# Load farsi_printed_digit dataset
+fpdig_dataset = DigitDataset(annotations_file='./data/farsi_printed_digit/labels.csv',
+                            img_dir='./data/farsi_printed_digit/',
+                            transform=transform)
+
+fpdig_train_idx, fpdig_test_idx = train_test_split(np.arange(len(fpdig_dataset)),
+                                                  test_size=0.2, random_state=42)
+
+fpdig_trainset = Subset(fpdig_dataset, fpdig_train_idx)
+fpdig_testset = Subset(fpdig_dataset, fpdig_test_idx)
+
+fpdig_trainloader = DataLoader(fpdig_trainset, batch_size=10, shuffle=True)
+fpdig_testloader = DataLoader(fpdig_testset, batch_size=10, shuffle=True)
+
+
+
 data_loader = {
-    "my_dataset": {"train": my_trainloader, "test": my_testloader},
+    "printed_digit": {"train": pdig_trainloader, "test": pdig_testloader},
     "mnist": {"train": mnist_trainloader, "test": mnist_testloader},
+    "hoda": {"train": hoda_trainloader, "test": hoda_testloader},
+    "farsi_printed_digit" : {"train": fpdig_trainloader, "test": fpdig_testloader}
 }

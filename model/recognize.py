@@ -3,15 +3,15 @@ import numpy as np
 import torch
 import torchvision.transforms as transforms
 
-from model.train import DigitModel
+from model.model import DigitModel
 
 
 
 # ---------- Load the pre-trained model ----------
-model_path = "./model/digit_model.pth"
-model = DigitModel()
-model.load_state_dict(torch.load(model_path))
-model.eval()
+def load_model(model_path, model=DigitModel()):
+    model.load_state_dict(torch.load(model_path))
+    return model
+
 
 
 transform = transforms.Compose([
@@ -20,7 +20,10 @@ transform = transforms.Compose([
 ])
 
 def preprocess_image(image):
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    if len(image.shape) == 3:
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    else:
+        gray = image
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     threshold = cv2.adaptiveThreshold(blurred, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
     return threshold
@@ -83,15 +86,16 @@ def empty_cell(cell):
     return np.mean(cell) > 250
 
 
-# load image and detect lines
-def detect_lines(image):
-    # img = cv2.imread(image, cv2.IMREAD_COLOR)
-    img = image
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# detect image lines
+def detect_lines(image) -> tuple[np.ndarray, np.ndarray]:
+    if len(image.shape) == 3:
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    else:
+        gray = image
     blur = cv2.GaussianBlur(gray, (5,5), 0)
     edges = cv2.Canny(blur, 50, 150, apertureSize=3)
     lines = cv2.HoughLinesP(edges, 1, np.pi/180, threshold=100, minLineLength=25, maxLineGap=50)
-    return img, lines
+    return image, lines
 
 # extract cells
 def extract_cells(image, padding=4):
@@ -105,8 +109,11 @@ def extract_cells(image, padding=4):
 # main function
 def recognize_sudoku(image:str | np.ndarray):
     """(image) could be image or path to specific image"""
+    model_path = "./model/digit_model.pth"
+    model = load_model(model_path)
+    model.eval()
     if isinstance(image, str):
-        image = cv2.imread(image_path, cv2.IMREAD_COLOR)
+        image = cv2.imread(image, cv2.IMREAD_COLOR)
     cells = extract_cells(image)
     sudoku = np.zeros(shape=(9, 9), dtype=str)
     for i in range(len(cells)):
@@ -120,7 +127,7 @@ def recognize_sudoku(image:str | np.ndarray):
 
 
 if __name__ == "__main__":
-    image_path = "img/sudoku7.png"
+    image_path = "img/sudoku3.png"
     img = cv2.imread(image_path, cv2.IMREAD_COLOR)
     sudoku = recognize_sudoku(img)
     print(sudoku)
