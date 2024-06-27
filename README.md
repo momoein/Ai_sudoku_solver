@@ -18,7 +18,7 @@ in this model i used MNIST and [printed digit dataset](https://github.com/kaydee
 
 + Folder [img](https://github.com/momoein/Ai_sudoku_solver/tree/master/img) contains some input image to test the model.
 
-  <img src="https://github.com/momoein/Ai_sudoku_solver/blob/master/img/sudoku1.png" width="225" height="225" align = "left"/>
-  <img src="https://github.com/momoein/Ai_sudoku_solver/blob/master/img/sudoku2.png" width="225" height="225" align = "middle"/>
+  <img src="https://github.com/momoein/Ai_sudoku_solver/blob/master/img/sudoku1.jpg" width="225" height="225" align = "left"/>
+  <img src="https://github.com/momoein/Ai_sudoku_solver/blob/master/img/sudoku2.jpg" width="225" height="225" align = "middle"/>
   
 + File [main.py](https://github.com/momoein/Ai_sudoku_solver/tree/master/main.py)
