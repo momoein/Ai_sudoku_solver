@@ -1,4 +1,15 @@
 # Ai_sudoku_solver
+Ai Sudoku Solver is a simple program to solve sudoku using computer vision and neural networks.
+you can simply give an image of sudoku to it and it return an array of completed sudoku.
+
+We have three important components:
+1. Computer vision to extract empty cells and numbers in the given image 
+2. CNN to recognize each number in the image
+3. csp (constraint satisfaction problem) solver to complete sudoku
+
+This project is developed for `fun and learning` only, it may have bugs. `Note`: The computer vision component is not the best implementation, I'll try and hopefully fix this.
+For now, keep in mind that the input image only contains the sudoku table
+And I recommend that the rows and columns of the table are not distorted
 
 ## Version : v0.1 Beta
 in this model i used MNIST and [printed digit dataset](https://github.com/kaydee0502/printed-digits-dataset).
