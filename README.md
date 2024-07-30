@@ -7,9 +7,11 @@ We have three important components:
 2. CNN to recognize each number in the image
 3. csp (constraint satisfaction problem) solver to complete sudoku
 
-This project is developed for `fun and learning` only, it may have bugs. `Note`: The computer vision component is not the best implementation, I'll try and hopefully fix this.
-For now, keep in mind that the input image only contains the sudoku table
-And I recommend that the rows and columns of the table are not distorted
+`NOTE:`
+- This project is developed for fun and learning only, it may have bugs.
+- The computer vision component is not the best implementation, I'll try and hopefully fix this.
+- For now, `keep in mind` that the input image only contains the sudoku table
+And I recommend that the rows and columns of the table are not distorted.
 
 ## Version : v0.1 Beta
 in this model i used MNIST and [printed digit dataset](https://github.com/kaydee0502/printed-digits-dataset).
@@ -33,3 +35,24 @@ in this model i used MNIST and [printed digit dataset](https://github.com/kaydee
   <img src="https://github.com/momoein/Ai_sudoku_solver/blob/master/img/sudoku2.jpg" width="225" height="225" align = "middle"/>
   
 + File [main.py](https://github.com/momoein/Ai_sudoku_solver/tree/master/main.py)
+
+
+## installation
+
+after download or clone repository go to project directory:
+```sh
+pip install -r requirements. txt
+``` 
+## usage
+windows:
+```sh
+py main.py
+```
+linux:
+```sh
+python3 main.py
+```
+after run open the browser and search this URL: 
+```
+http://127.0.0.1:7860
+```
