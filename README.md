@@ -60,3 +60,8 @@ after run open the browser and search this URL:
 ```
 http://127.0.0.1:7860
 ```
+
+## example of usage
+in this example used [img/sudoku2.jpg](https://github.com/momoein/Ai_sudoku_solver/tree/master/img) 
+
+<img src="https://github.com/momoein/Ai_sudoku_solver/blob/master/img/application_test.png" width="748" height="318" align = "left"/>
