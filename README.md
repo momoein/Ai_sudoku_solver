@@ -45,7 +45,7 @@ git clone https://github.com/momoein/Ai_sudoku_solver.git
 cd Ai_sudoku_solver
 ```
 ```sh
-pip install -r requirements. txt
+pip install -r requirements.txt
 ``` 
 ## usage
 windows:
